@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+    id 'com.google.cloud.tools.jib' version '1.7.0'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+
+jib {
+        from {
+            image = 'openjdk:alpine'
+        }
+        to {
+            image = 'localhost:5000/jugash/mbox'
+            tags = ['poc']
+        }
+        container {
+        }
+        allowInsecureRegistries = true
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+
+dependencies {
+    implementation 'org.slf4j:slf4j-log4j12:1.7.25'
+    implementation 'org.eclipse.jetty:jetty-server:9.4.25.v20191220'
+    implementation 'log4j:log4j:1.2.17'
+    testImplementation 'junit:junit:4.12'
+}
